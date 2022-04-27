@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>TAREFAS - ESIG SOFTWARE</title>
+</head>
+<body>
+	<center>
+	<div class="header">
+		<h1>Tarefas - ESIG SOFTWARE</h1>
+	</div>
+	
+	<!-- FORM -->
+	
+	<div class="main">
+		<h:form id="searchAndSave" class="form" border="1">
+			<h:panelGrid id = "panel" columns = "2" cellpadding = "5" cellspacing = "1">
+				
+      			<h:outputText value = "Título"/>
+				<h:inputText id="name" style="padding: 10px" value="#{taskBean.title}" maxlength="50"/>
+			
+				<h:outputText value = "Descrição"/>
+				<h:inputTextarea style="padding: 10px" value="#{taskBean.description}" />
+			
+				<h:outputText value = "Responsável"/>
+				<h:selectOneMenu name="responsibleTask" value="#{taskBean.responsible}"> 
+   					<f:selectItems value="#{memberBean.readRegisters()}" var="member" itemValue="#{member.id}" itemLabel="#{member.name}"  /> 
+				</h:selectOneMenu> 
+			
+				<h:outputText value = "Prioridade"/>
+				<h:selectOneMenu name="statusTask" value="#{taskBean.priority}">
+   					<f:selectItem itemValue="1" itemLabel="Baixa"/>
+   					<f:selectItem itemValue="2" itemLabel="Média"/> 
+   					<f:selectItem itemValue="3" itemLabel="Alta"/> 
+				</h:selectOneMenu>
+				
+				<h:outputText value = "Status"/>
+				<h:selectOneMenu name="statusTask" value="#{taskBean.situation}">
+   					<f:selectItem itemValue="true" itemLabel="Concluída" rendered="#{taskBean.situation == true}"/>
+   					<f:selectItem itemValue="false" itemLabel="Em andamento" rendered="#{taskBean.situation == false}"/>
+				</h:selectOneMenu> 
+			
+			</h:panelGrid>
+				<h:commandButton style="padding: 10px; margin-top: 20px; margin-right: 30px;" value="Pesquisar Tarefa" action="#{taskBean.findRegister(taskBean)}" update="searchAndSave name"/>
+				<h:commandButton style="padding: 10px; margin-top: 20px;" value="Voltar" action="#{taskBean.back()}"/>
+		</h:form>
+	</div>
+	<!-- FIM FORM -->
+	
+	<!-- LISTAGEM MEMBROS -->
+	<div class="table" style="margin-top: 30px; overflow: scroll; height: 200px; width: 100%;">
+		<h:dataTable id="tabletasks" value="#{taskBean.readRegisters()}" var="task" cellpadding = "10"  cellspacing = "1">
+			<h:column id="columnId">
+    			<f:facet name="header">
+      				<h:outputLabel id="headerId" value="Número"/>
+    			</f:facet>
+    			<h:outputLabel value="#{task.id}"/>
+    		</h:column>
+    		
+    		<h:column id="columnName">
+    			<f:facet name="header">
+      				<h:outputLabel id="headerTitle" value="Título"/>
+    			</f:facet>
+    			<h:outputLabel value="#{task.title}"/>
+    		</h:column>
+    		
+    		<h:column id="columnResponsible">
+    			<f:facet name="header">
+      				<h:outputLabel id="headerResponsible" value="Responsável"/>
+    			</f:facet>
+    			<h:outputLabel value="#{task.responsibleName}"/>
+    		</h:column>
+    		
+    		<!-- EDITAR  -->
+    		<h:column id="columnEditar">
+    			<f:facet name="header">
+      				<h:outputLabel id="headerEditar" value="Editar"/>
+    			</f:facet>
+    			<h:form id="formUpdate">
+    				<h:commandButton value="Editar" action="#{taskBean.getRegister(task.id)}" update="formUpdate tabletasks"/>
+            	</h:form>
+    		</h:column>
+    		
+    		<!-- DELETAR  -->
+    		<h:column id="columnDelete">
+    			<f:facet name="header">
+      				<h:outputLabel id="headerDelete" value="Excluir"/>
+    			</f:facet>
+    			<h:form id="formDelete">
+    				<h:commandButton value="Excluir" action="#{taskBean.delete(task.id)}" update="formDelete tabletasks"/>
+            	</h:form>
+    		</h:column>
+		</h:dataTable>
+	</div>
+	<!-- FIM LISTAGEM MEMBROS -->
+	</center>
+	
+	
+</body>
+</html>

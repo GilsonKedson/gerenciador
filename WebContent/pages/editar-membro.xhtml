@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	>
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Nossos Colaboradores - ESIG SOFTWARE</title>
+
+	<!--<h:outputStylesheet name="style.css" library="css" />-->
+</h:head>
+
+<h:body>
+	<center>
+	<h1 style="text-align: center;">Editar Colaborador</h1>
+	
+	<h:form id="edit">
+		<h:panelGrid id="dados" columns="2" cellpadding="5">
+			<h:outputLabel id="nameLabel" value="Nome:"/>
+        	<h:inputText style="padding: 10px" label="Nome" value="#{editMember.name}" maxlength="50" required="true"/>
+		</h:panelGrid>
+		
+		<h:panelGrid columns="2" cellpadding="5">
+			<h:commandButton style="margin-left: 60px;" value="Editar Membro" action="#{editMember.update(editMember)}" update="edit"/>
+		</h:panelGrid>
+	</h:form>
+	</center>
+</h:body>
+
+</html>

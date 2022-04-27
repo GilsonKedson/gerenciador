@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>TAREFAS - ESIG SOFTWARE</title>
+</head>
+<body>
+<center>
+	<div class="header">
+		<h1>Nossos Colaboradores - ESIG SOFTWARE</h1>
+	</div>
+	
+	<!-- FORM -->
+	<div class="main">
+		<h:form id="searchAndSave" class="form">
+			<h:panelGrid id = "panel" columns = "2" cellpadding = "5" cellspacing = "1">
+			<h:outputText value = "Nome"/>
+			<h:inputText id="name" style="padding: 10px" value="#{memberBean.name}" maxlength="50" required="true"/>
+			
+			<h:commandButton value="Cadastrar Colaborador" action="#{memberBean.create(memberBean)}" update="searchAndSave name"/>
+			<h:commandButton value="Pesquisar Colaborador" action="#{memberBean.findRegister(memberBean)}" update="searchAndSave name"/>
+			</h:panelGrid>
+		</h:form>
+	</div>
+	<!-- FIM FORM -->
+	
+	<!-- LISTAGEM MEMBROS -->
+	<div class="table" style="margin-top: 30px; overflow: scroll; height: 200px; width: 100%;">
+		<h:dataTable id="tableMembers" value="#{memberBean.readRegisters()}" var="member" cellpadding = "10"  cellspacing = "1">
+			<h:column id="columnId">
+    			<f:facet name="header">
+      				<h:outputLabel id="headerId" value="ID"/>
+    			</f:facet>
+    			<h:outputLabel value="#{member.id}"/>
+    		</h:column>
+    		
+    		<h:column id="columnName">
+    			<f:facet name="header">
+      				<h:outputLabel id="headerName" value="Nome"/>
+    			</f:facet>
+    			<h:outputLabel value="#{member.name}"/>
+    		</h:column>
+    		
+    		<!-- EDITAR  -->
+    		<h:column id="columnEditar">
+    			<f:facet name="header">
+      				<h:outputLabel id="headerEditar" value="Editar"/>
+    			</f:facet>
+    			<h:form id="formUpdate">
+    				<h:commandButton value="Editar" action="#{memberBean.getRegister(member.id)}" update="formUpdate tableMembers"/>
+            	</h:form>
+    		</h:column>
+    		
+    		<!-- DELETAR  -->
+    		<h:column id="columnDelete">
+    			<f:facet name="header">
+      				<h:outputLabel id="headerDelete" value="Excluir"/>
+    			</f:facet>
+    			<h:form id="formDelete">
+    				<h:commandButton value="Excluir" action="#{memberBean.delete(member.id)}" update="formDelete tableMembers"/>
+            	</h:form>
+    		</h:column>
+		</h:dataTable>
+	</div>
+	<!-- FIM LISTAGEM MEMBROS -->
+	
+	</center>
+</body>
+</html>
