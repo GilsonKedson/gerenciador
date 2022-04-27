@@ -124,7 +124,7 @@ public class TaskDao implements CRUDInterface<TaskBean> {
 				editTask.setResponsible(result.getInt("member_id"));
 				
 				if(result.getInt("member_id") == 0) {
-					editTask.setResponsibleName("Sem respons·vel");
+					editTask.setResponsibleName("Sem respons√°vel");
 				}else {
 					editTask.setResponsibleName(m.getNameRegisters(result.getInt("member_id")));
 				}
@@ -151,7 +151,7 @@ public class TaskDao implements CRUDInterface<TaskBean> {
 		try {
 			conn = ConnectionDB.getConnection();
 			state = conn.createStatement();
-			result = state.executeQuery("SELECT * FROM tasks");
+			result = state.executeQuery("SELECT * FROM tasks WHERE situation="+false);
 			
 			while(result.next()){
 				TaskBean task = new TaskBean();
@@ -161,7 +161,7 @@ public class TaskDao implements CRUDInterface<TaskBean> {
 				task.setResponsible(result.getInt("member_id"));
 				
 				if(result.getInt("member_id") == 0) {
-					task.setResponsibleName("Sem respons·vel");
+					task.setResponsibleName("Sem respons√°vel");
 				}else {
 					task.setResponsibleName(m.getNameRegisters(result.getInt("member_id")));
 				}
@@ -188,7 +188,7 @@ public class TaskDao implements CRUDInterface<TaskBean> {
 		String sql = "SELECT * FROM tasks WHERE ";
 		String query;
 		
-		// SELECT DE MILH’ES, SQN
+		// SELECT DE MILH√ïES, SQN
 		if(params.getId() != 0 && params.getResponsible() != 0 && !params.getTitle().isEmpty() && !params.getDescription().isEmpty()) {
 			sql+= "task_id="+params.getId()+" AND ";
 			sql+= "member_id="+params.getResponsible()+" AND ";
@@ -231,7 +231,7 @@ public class TaskDao implements CRUDInterface<TaskBean> {
 				task.setResponsible(result.getInt("member_id"));
 				
 				if(result.getInt("member_id") == 0) {
-					task.setResponsibleName("Sem respons·vel");
+					task.setResponsibleName("Sem respons√°vel");
 				}else {
 					task.setResponsibleName(m.getNameRegisters(result.getInt("member_id")));
 				}
