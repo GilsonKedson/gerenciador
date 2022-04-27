@@ -19,13 +19,13 @@
 		<h:form id="searchAndSave" class="form" border="1">
 			<h:panelGrid id = "panel" columns = "2" cellpadding = "5" cellspacing = "1">
 				
-      			<h:outputText value = "Título"/>
+      			<h:outputText value = "TÃ­tulo"/>
 				<h:inputText id="name" style="padding: 10px" value="#{taskBean.title}" maxlength="50"/>
 			
-				<h:outputText value = "Descrição"/>
+				<h:outputText value = "DescriÃ§Ã£o"/>
 				<h:inputTextarea style="padding: 10px" value="#{taskBean.description}" />
 			
-				<h:outputText value = "Responsável"/>
+				<h:outputText value = "ResponsÃ¡vel"/>
 				<h:selectOneMenu name="responsibleTask" value="#{taskBean.responsible}"> 
    					<f:selectItems value="#{memberBean.readRegisters()}" var="member" itemValue="#{member.id}" itemLabel="#{member.name}"  /> 
 				</h:selectOneMenu> 
@@ -33,13 +33,13 @@
 				<h:outputText value = "Prioridade"/>
 				<h:selectOneMenu name="statusTask" value="#{taskBean.priority}">
    					<f:selectItem itemValue="1" itemLabel="Baixa"/>
-   					<f:selectItem itemValue="2" itemLabel="Média"/> 
+   					<f:selectItem itemValue="2" itemLabel="MÃ©dia"/> 
    					<f:selectItem itemValue="3" itemLabel="Alta"/> 
 				</h:selectOneMenu>
 				
 				<h:outputText value = "Status"/>
 				<h:selectOneMenu name="statusTask" value="#{taskBean.situation}">
-   					<f:selectItem itemValue="true" itemLabel="Concluída" rendered="#{taskBean.situation == true}"/>
+   					<f:selectItem itemValue="true" itemLabel="ConcluÃ­da" rendered="#{taskBean.situation == true}"/>
    					<f:selectItem itemValue="false" itemLabel="Em andamento" rendered="#{taskBean.situation == false}"/>
 				</h:selectOneMenu> 
 			
@@ -52,24 +52,24 @@
 	
 	<!-- LISTAGEM MEMBROS -->
 	<div class="table" style="margin-top: 30px; overflow: scroll; height: 200px; width: 100%;">
-		<h:dataTable id="tabletasks" value="#{taskBean.readRegisters()}" var="task" cellpadding = "10"  cellspacing = "1">
+		<h:dataTable id="tabletasks" value="#{resultTasks}" var="task" cellpadding = "10"  cellspacing = "1">
 			<h:column id="columnId">
     			<f:facet name="header">
-      				<h:outputLabel id="headerId" value="Número"/>
+      				<h:outputLabel id="headerId" value="NÃºmero"/>
     			</f:facet>
     			<h:outputLabel value="#{task.id}"/>
     		</h:column>
     		
     		<h:column id="columnName">
     			<f:facet name="header">
-      				<h:outputLabel id="headerTitle" value="Título"/>
+      				<h:outputLabel id="headerTitle" value="TÃ­tulo"/>
     			</f:facet>
     			<h:outputLabel value="#{task.title}"/>
     		</h:column>
     		
     		<h:column id="columnResponsible">
     			<f:facet name="header">
-      				<h:outputLabel id="headerResponsible" value="Responsável"/>
+      				<h:outputLabel id="headerResponsible" value="ResponsÃ¡vel"/>
     			</f:facet>
     			<h:outputLabel value="#{task.responsibleName}"/>
     		</h:column>
